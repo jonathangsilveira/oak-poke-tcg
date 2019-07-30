@@ -1,0 +1,33 @@
+package br.edu.jgsilveira.portfolio.oakpokedex.tcg.query
+
+data class CardsParameters(
+    var id: String? = null,
+    var name: String? = null,
+    var nationalPokedexNumber: Int? = null,
+    var types: String? = null,
+    var subtype: String? = null,
+    var supertype: String? = null,
+    var hp: String? = null,
+    var number: String? = null,
+    var artist: String? = null,
+    var rarity: String? = null,
+    var series: String? = null,
+    var set: String? = null,
+    var setCode: String? = null,
+    var retreatCost: String? = null,
+    var text: String? = null,
+    var attackDamage: String? = null,
+    var attackCost: String? = null,
+    var attackName: String? = null,
+    var attackText: String? = null,
+    var weaknesses: String? = null,
+    var resistances: String? = null,
+    var ancientTrait: String? = null,
+    var abilityName: String? = null,
+    var abilityText: String? = null,
+    var abilityType: String? = null,
+    var contains: String? = null,
+    var evolvesFrom: String? = null,
+    var page: Int? = null,
+    var pageSize: Int? = null
+)

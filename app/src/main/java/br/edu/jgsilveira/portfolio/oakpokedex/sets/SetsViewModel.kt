@@ -1,4 +1,4 @@
-package br.edu.jgsilveira.portfolio.oakpokedex
+package br.edu.jgsilveira.portfolio.oakpokedex.sets
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

@@ -1,9 +1,11 @@
-package br.edu.jgsilveira.portfolio.oakpokedex
+package br.edu.jgsilveira.portfolio.oakpokedex.set
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import br.edu.jgsilveira.portfolio.oakpokedex.CardsNetworkState
+import br.edu.jgsilveira.portfolio.oakpokedex.cards.CardsViewState
 import br.edu.jgsilveira.portfolio.oakpokedex.tcg.Repository
 import br.edu.jgsilveira.portfolio.oakpokedex.tcg.data.NetworkResult
 

@@ -1,4 +1,4 @@
-package br.edu.jgsilveira.portfolio.oakpokedex
+package br.edu.jgsilveira.portfolio.oakpokedex.sets
 
 import br.edu.jgsilveira.portfolio.oakpokedex.tcg.data.Sets
 

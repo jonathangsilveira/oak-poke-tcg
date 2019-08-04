@@ -1,16 +1,17 @@
-package br.edu.jgsilveira.portfolio.oakpokedex
+package br.edu.jgsilveira.portfolio.oakpokedex.sets
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.edu.jgsilveira.portfolio.oakpokedex.R
 import br.edu.jgsilveira.portfolio.oakpokedex.tcg.data.Sets
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.sets_item.view.*
 
 class SetsAdapter(private val sets: Sets): RecyclerView.Adapter<SetsAdapter.SetsViewHolder>() {
 
-    private var onItemClick: (String, String) -> Unit = { _, _ -> }
+    private var onItemClick: (String, String, String) -> Unit = { _, _, _ -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetsViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.sets_item, parent, false)
@@ -21,7 +22,7 @@ class SetsAdapter(private val sets: Sets): RecyclerView.Adapter<SetsAdapter.Sets
 
     override fun onBindViewHolder(holder: SetsViewHolder, position: Int) = holder.bind(sets.sets[position])
 
-    fun setOnItemClickListener(onItemClick: (setCode: String, backdropUrl: String) -> Unit) {
+    fun setOnItemClickListener(onItemClick: (setCode: String, setName: String, backdropUrl: String) -> Unit) {
         this.onItemClick = onItemClick
     }
 
@@ -29,7 +30,7 @@ class SetsAdapter(private val sets: Sets): RecyclerView.Adapter<SetsAdapter.Sets
 
         fun bind(set: Sets.Set) {
             itemView.setOnClickListener {
-                onItemClick(set.code, set.logoUrl)
+                onItemClick(set.code, set.name, set.logoUrl)
             }
             itemView.name.text = set.name
             itemView.series.text = set.series

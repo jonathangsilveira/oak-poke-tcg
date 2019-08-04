@@ -1,6 +1,8 @@
 package br.edu.jgsilveira.portfolio.oakpokedex
 
 import android.app.Application
+import br.edu.jgsilveira.portfolio.oakpokedex.set.SetViewModel
+import br.edu.jgsilveira.portfolio.oakpokedex.sets.SetsViewModel
 import br.edu.jgsilveira.portfolio.oakpokedex.tcg.Endpoint
 import br.edu.jgsilveira.portfolio.oakpokedex.tcg.Repository
 import org.koin.android.ext.koin.androidApplication
@@ -26,10 +28,16 @@ class App: Application() {
                     ViewModel(application = androidApplication(), repo = get())
                 }
                 viewModel(override = true) {
-                    SetsViewModel(application = androidApplication(), repo = get())
+                    SetsViewModel(
+                        application = androidApplication(),
+                        repo = get()
+                    )
                 }
                 viewModel(override = true) {
-                    SetViewModel(application = androidApplication(), repo = get())
+                    SetViewModel(
+                        application = androidApplication(),
+                        repo = get()
+                    )
                 }
             }
             modules(module)

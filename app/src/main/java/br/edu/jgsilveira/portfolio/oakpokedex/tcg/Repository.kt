@@ -3,7 +3,7 @@ package br.edu.jgsilveira.portfolio.oakpokedex.tcg
 import android.util.Log
 import androidx.lifecycle.liveData
 import br.edu.jgsilveira.portfolio.oakpokedex.CardsNetworkState
-import br.edu.jgsilveira.portfolio.oakpokedex.SetsNetworkState
+import br.edu.jgsilveira.portfolio.oakpokedex.sets.SetsNetworkState
 import br.edu.jgsilveira.portfolio.oakpokedex.tcg.data.*
 import kotlinx.coroutines.Dispatchers
 

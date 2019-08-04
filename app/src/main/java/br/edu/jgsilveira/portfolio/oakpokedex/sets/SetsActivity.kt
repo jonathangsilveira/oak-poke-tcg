@@ -1,12 +1,13 @@
-package br.edu.jgsilveira.portfolio.oakpokedex
+package br.edu.jgsilveira.portfolio.oakpokedex.sets
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import br.edu.jgsilveira.portfolio.oakpokedex.R
+import br.edu.jgsilveira.portfolio.oakpokedex.set.SetActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_sets.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,16 +29,23 @@ class SetsActivity : AppCompatActivity() {
         loading.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.result != null)
             setsList.adapter = SetsAdapter(state.result).apply {
-                setOnItemClickListener { setCode, backdropUrl ->
-                    callSet(setCode, backdropUrl)
+                setOnItemClickListener { setCode, setName, backdropUrl ->
+                    callSet(setCode, setName, backdropUrl)
                 }
             }
         if (!state.error.isNullOrEmpty())
             Snackbar.make(setsList, state.error.orEmpty(), Snackbar.LENGTH_LONG).show()
     }
 
-    private fun callSet(setCode: String, backdropUrl: String) {
-        startActivity(SetActivity.newIntent(this@SetsActivity, setCode, backdropUrl))
+    private fun callSet(setCode: String, setName: String, backdropUrl: String) {
+        startActivity(
+            SetActivity.newIntent(
+                this@SetsActivity,
+                setCode,
+                setName,
+                backdropUrl
+            )
+        )
     }
 
     private fun setupRecyclerView() {

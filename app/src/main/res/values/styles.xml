@@ -18,6 +18,7 @@
     <style name="AppTheme.CardDialog" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="dialogCornerRadius">14dp</item>
     </style>
 
 </resources>

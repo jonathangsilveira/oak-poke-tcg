@@ -13,4 +13,11 @@
             android:scaleType="fitCenter"
             android:src="@drawable/card_back"/>
 
+    <ProgressBar android:id="@+id/progressIndicator"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:indeterminateBehavior="cycle"
+                 android:indeterminate="true"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

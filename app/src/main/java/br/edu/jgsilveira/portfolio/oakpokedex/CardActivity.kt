@@ -3,19 +3,31 @@ package br.edu.jgsilveira.portfolio.oakpokedex
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_card.*
+import java.lang.Exception
 
-class CardActivity : AppCompatActivity() {
+class CardActivity : AppCompatActivity(), Callback {
+
+    override fun onSuccess() {
+        progressIndicator.visibility = View.GONE
+    }
+
+    override fun onError(e: Exception?) {
+        progressIndicator.visibility = View.GONE
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card)
+        progressIndicator.visibility = View.VISIBLE
         Picasso.get()
             .load(intent.getStringExtra(IMAGE_URL))
             .placeholder(R.drawable.card_back)
-            .into(cardImage)
+            .into(cardImage, this)
     }
 
     companion object {

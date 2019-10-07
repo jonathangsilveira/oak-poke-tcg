@@ -2,12 +2,12 @@ package br.edu.jgsilveira.portfolio.oakpokedex.tcg
 
 import br.edu.jgsilveira.portfolio.oakpokedex.tcg.data.NetworkResult
 
-sealed class NetworkState {
+sealed class NetworkState<T> {
 
-    object Loading: NetworkState()
+    class Loading<T>: NetworkState<T>()
 
-    data class Loaded(val value: Any?): NetworkState()
+    data class Loaded<T>(val value: T?): NetworkState<T>()
 
-    data class Error(val cause: NetworkResult.Failure): NetworkState()
+    data class Error<T>(val cause: NetworkResult.Failure<T>): NetworkState<T>()
 
 }

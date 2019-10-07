@@ -13,55 +13,50 @@ class Repository(private val endpoint: Endpoint) {
 
     private var subtypes: Subtypes? = null
 
-    fun loadTypes(): Types? {
+    fun loadTypes() = liveData(Dispatchers.IO) {
         if (types == null) {
+            emit(NetworkState.Loading())
             when (val result = endpoint.types()) {
-                is NetworkResult.Success -> types = result.value
-                is NetworkResult.Failure.Response -> {
-                    Log.i(TAG, "Fail to fetch types! Code: ${result.body?.status} - Message: ${result.body?.error}")
+                is NetworkResult.Success -> {
+                    types = result.value
+                    emit(NetworkState.Loaded(types))
                 }
-                is NetworkResult.Failure.Undefined -> {
-                    Log.e(TAG, "Fail to fetch types!", result.cause)
-                }
+                is NetworkResult.Failure -> emit(NetworkState.Error(result))
             }
-        }
-        return types
+        } else
+            emit(NetworkState.Loaded(types))
     }
 
-    fun loadSubtypes(): Subtypes? {
-        if (subtypes == null)
+    fun loadSubtypes() = liveData(Dispatchers.IO) {
+        if (subtypes == null) {
+            emit(NetworkState.Loading())
             when (val result = endpoint.subtypes()) {
-                is NetworkResult.Success -> subtypes = result.value
-                is NetworkResult.Failure.Response -> {
-                    Log.i(TAG, "Fail to fetch subtypes! Code: ${result.body?.status} - Message: ${result.body?.error}")
+                is NetworkResult.Success -> {
+                    subtypes = result.value
+                    emit(NetworkState.Loaded(subtypes))
                 }
-                is NetworkResult.Failure.Undefined -> {
-                    Log.e(TAG, "Fail to fetch subtypes!", result.cause)
+                is NetworkResult.Failure -> {
+                    emit(NetworkState.Error(result))
                 }
             }
-        return subtypes
+        } else
+            emit(NetworkState.Loaded(subtypes))
     }
 
     fun sets() = liveData(Dispatchers.IO) {
-        emit(SetsNetworkState.Loading)
+        emit(NetworkState.Loading())
         when (val result = endpoint.sets(mapOf())) {
-            is NetworkResult.Success<*> -> emit(SetsNetworkState.Loaded(data = result.value as Sets))
-            is NetworkResult.Failure -> emit(SetsNetworkState.Error(failure = result))
+            is NetworkResult.Success -> emit(NetworkState.Loaded(result.value))
+            is NetworkResult.Failure -> emit(NetworkState.Error(result))
         }
     }
 
     fun set(setCode: String) = liveData(Dispatchers.IO) {
-        emit(CardsNetworkState.Loading)
+        emit(NetworkState.Loading())
         when (val result = endpoint.setCards(setCode)) {
-            is NetworkResult.Success<*> -> emit(CardsNetworkState.Loaded(result.value as Cards))
-            is NetworkResult.Failure -> emit(CardsNetworkState.Error(result))
+            is NetworkResult.Success -> emit(NetworkState.Loaded(result.value))
+            is NetworkResult.Failure -> emit(NetworkState.Error(result))
         }
-    }
-
-    companion object {
-
-        private const val TAG = "Repository"
-
     }
 
 }
